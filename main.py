@@ -10,11 +10,22 @@ pygame.display.set_caption("Balloon Pop!")
 # Set Player image -- a SPACESHIP!
 playerImg = pygame.image.load('spaceship.png')
 x_value = 700
-y_value = 270
+y_value = 268
+y_change = 0
 
-# use blit method to draw the spaceship on window
+# Set balloon images -- added a spider so it looks scary!
+balloonImg = pygame.image.load('spider.png')
+b_x = 50
+b_y = 268
+b_y_change = 0
+
+
+# use blit method to draw the spaceship & balloon on window
 def player(x, y):
     window.blit(playerImg, (x, y))
+
+def balloon(x, y):
+    window.blit(balloonImg, (x, y))
 
 
 # Set conditions for the game window to close
@@ -28,16 +39,24 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        # Add key event for the Spaceship
+        # Add key events for the Spaceship
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                print("Up pressed!")
+                y_change = -5
             if event.key == pygame.K_DOWN:
-                print("Down pressed!")
+                y_change = 5
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                print("Key is released x")
+                y_change = 0
 
-    # Draw the player after the screen background was set up
+    y_value += y_change
+    # Set boundaries for the window (5px margin)
+    if y_value <= 5:
+        y_value = 5
+    elif y_value >= 531:
+        y_value = 531
+
+    # Draw the player and balloons after the screen background was set up
+    balloon(b_x, b_y)
     player(x_value, y_value)
     pygame.display.update()

@@ -1,3 +1,8 @@
+#
+# Made by Yuxin 5th September, 2020
+# yuxin_ye@protonmail.com
+#
+
 import pygame
 
 # Initialise pygame and create game window

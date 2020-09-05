@@ -48,24 +48,24 @@ bulletY = 0
 bulletXChange = 5
 bulletState = "ready"
 
-
 # track missed bullets
 missed_value = 0
 font = pygame.font.Font('font/Bungee-Regular.ttf', 30)
 textX = 250
 textY = 10
 
-# display missed shots on the screen
-def showMissed(x, y):
-    missed = font.render("Missed Shots: " + str(missed_value), True, (255, 230, 242))
-    window.blit(missed, (x, y))
+# end game text
+overText = pygame.font.Font('font/Bungee-Regular.ttf', 50)
+
 
 # use blit method to draw the spaceship & balloon on window
 def player(x, y):
     window.blit(playerImg, (x, y))
 
+
 def balloon(x, y):
     window.blit(balloonImg, (x, y))
+
 
 # show bullet when spaceBar is pressed
 # use y + 30 to make sure the bullet is shooting from the middle
@@ -74,21 +74,44 @@ def fire(x, y):
     bulletState = "fire"
     window.blit(bulletImg, (x, y + 30))
 
+
 # calculate if the bullet and balloon collides
 # use Distance Formula (https://tinyurl.com/hgh57xt)
 def isCollision(balloonX, balloonY, bulletX, bulletY):
-    distance_D = math.sqrt( math.pow((balloonX - bulletX), 2) + math.pow((balloonY - bulletY), 2) )
+    distance_D = math.sqrt(math.pow((balloonX - bulletX), 2) + math.pow((balloonY - bulletY), 2))
     if distance_D < 50:
         return True
     else:
         return False
 
 
+# display missed shots on the screen
+def show_missed(x, y):
+    missed = font.render("Missed Shots: " + str(missed_value), True, (255, 230, 242))
+    window.blit(missed, (x, y))
+
+
+# function to end the game
+def end():
+    text = overText.render("YOU WON THE GAME!", True, (255, 230, 242))
+    window.blit(text, (150, 250))
+    while True:
+        for event in pygame.event.get():
+            # print(event)
+            if event.type == pygame.QUIT:
+                pygame.quit()
+
+        show_missed(textX, textY)
+        balloon(balloonX, balloonY)
+        player(playerX, playerY)
+        pygame.display.update()
+
+
 # Set conditions for the game window to close
 running = True
 while running:
 
-    # Set background to black
+    # Set background
     window.fill((0, 0, 0))
     window.blit(background, (0, 0))
 
@@ -138,24 +161,22 @@ while running:
         bulletX = 667
         # when the bullet shoot outside window, change the state to ready
         bulletState = "ready"
+        # track missed bullets
+        missed_value += 1
     if bulletState == "fire":
         fire(bulletX, bulletY)
         bulletX -= bulletXChange
 
-
-    # Collision
+    # when the balloon is hit, end the game
     collision = isCollision(balloonX, balloonY, bulletX, bulletY)
     if collision:
         hitSound = mixer.Sound("sound/hit.wav")
         hitSound.play()
-        bulletX = 667
-        bulletState = "ready"
         balloonImg = pygame.image.load('image/skull.png')
-        missed_value += 1
-
+        end()
 
     # Draw the player and balloons after the screen background was set up
     balloon(balloonX, balloonY)
     player(playerX, playerY)
-    showMissed(textX, textY)
+    show_missed(textX, textY)
     pygame.display.update()

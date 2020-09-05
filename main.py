@@ -14,6 +14,7 @@
 import pygame
 import random
 import math
+from pygame import mixer
 
 # Initialise pygame and create game window
 pygame.init()
@@ -48,8 +49,16 @@ bulletXChange = 5
 bulletState = "ready"
 
 
-# track score
-score = 0
+# track missed bullets
+missed_value = 0
+font = pygame.font.Font('font/Bungee-Regular.ttf', 30)
+textX = 250
+textY = 10
+
+# display missed shots on the screen
+def showMissed(x, y):
+    missed = font.render("Missed Shots: " + str(missed_value), True, (255, 230, 242))
+    window.blit(missed, (x, y))
 
 # use blit method to draw the spaceship & balloon on window
 def player(x, y):
@@ -97,6 +106,8 @@ while running:
                 # make sure the bullet is only appearing when it's state is "ready"
                 # witch means when the bullet shoot outside window
                 if bulletState == "ready":
+                    shootSound = mixer.Sound("sound/shoot.wav")
+                    shootSound.play()
                     bulletY = playerY
                     fire(bulletX, bulletY)
         if event.type == pygame.KEYUP:
@@ -135,14 +146,16 @@ while running:
     # Collision
     collision = isCollision(balloonX, balloonY, bulletX, bulletY)
     if collision:
+        hitSound = mixer.Sound("sound/hit.wav")
+        hitSound.play()
         bulletX = 667
         bulletState = "ready"
         balloonImg = pygame.image.load('image/skull.png')
-        print(score)
-        score += 1
+        missed_value += 1
 
 
     # Draw the player and balloons after the screen background was set up
     balloon(balloonX, balloonY)
     player(playerX, playerY)
+    showMissed(textX, textY)
     pygame.display.update()

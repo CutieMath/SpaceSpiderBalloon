@@ -15,10 +15,12 @@ The bullet speed should be 1.5 times the speed of the balloon.
 The balloon should change directions (up or down) at any time.  
   
   
-![Gif of the game](https://github.com/CutieMath/balloonPop/blob/master/image/demo.gif)
-
-
-
+![Gif of the game](https://github.com/CutieMath/balloonPop/blob/master/image/demo.gif)  
+  
+## Configuration  
+The ideal way to configure the game to your local machine is by getting it from Version Control (Use -> Clone with SSH).  
+Alternatively, if configure it by openning the .zip file, delete the vcs.xml file located in the .idea folder if **Invalid VCS root mapping error** occurs.  
+  
   
 ## Image and icons credits  
 **Background:** 800 x 600 <a href='https://www.freepik.com/free-vector/earth-view-night-from-alien-planet-neon-space_5603526.htm'>Image Link</a> <a href="https://www.freepik.com/vectors/star">Star vector created by vectorpouch - www.freepik.com</a>  

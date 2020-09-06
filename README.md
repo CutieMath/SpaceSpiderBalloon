@@ -6,7 +6,7 @@ The player's goal is to shoot the Space Spider Balloon down!
 The player can move the Spaceship up and down using the arrow keys. Fire a bullet using space key.  
 The player can shoot one bullet at a time. Only when the bullet is out of the game then the player can shoot again.  
 ![Screenshot of the game]
-(image/screenShot.png)
+(https://github.com/CutieMath/balloonPop/blob/master/image/screenShot.png)
 
 
 

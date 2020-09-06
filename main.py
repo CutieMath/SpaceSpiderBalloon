@@ -2,14 +2,6 @@
 # Made by Yuxin 5th September, 2020
 # yuxin_ye@protonmail.com
 #
-# image Used:
-# Background: 800 x 600 <a href='https://www.freepik.com/vectors/star'>Star vector created by vectorpouch - www.freepik.com</a>
-# Spaceship: 128px <a href="http://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-# Spider Balloon: 128px <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-# background:
-# bullet: 64px
-# death: Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-
 
 import pygame
 import random
@@ -21,9 +13,9 @@ pygame.init()
 window = pygame.display.set_mode((800, 600))
 
 # Set up Title for the window
-pygame.display.set_caption("Balloon Pop!")
+pygame.display.set_caption("Space Spider Balloon")
 
-# Set up background=
+# Set up background
 background = pygame.image.load('image/background.png')
 
 # Player image -- a SPACESHIP!
@@ -45,6 +37,7 @@ balloonYChange = 2
 bulletImg = pygame.image.load('image/bullet.png')
 bulletX = 667
 bulletY = 0
+# bullet's speed is 1.5 times than the balloon's speed
 bulletXChange = 5
 bulletState = "ready"
 
@@ -65,7 +58,6 @@ overText = pygame.font.Font('font/Bungee-Regular.ttf', 50)
 # use blit method to draw the spaceship & balloon on window
 def player(x, y):
     window.blit(playerImg, (x, y))
-
 
 def balloon(x, y):
     window.blit(balloonImg, (x, y))
@@ -193,7 +185,7 @@ while running:
         balloonImg = pygame.image.load('image/skull.png')
         end()
 
-    # Draw the player and balloons after the screen background was set up
+    # Draw the player, balloon and missed bullets count
     balloon(balloonX, balloonY)
     player(playerX, playerY)
     showMissed(textX, textY)

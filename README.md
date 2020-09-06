@@ -1,4 +1,4 @@
-# Balloon Pop -- Chapter 1 Space Spider Balloon
+# The story of Space Spider Balloon
 A simple game made by python (v. 3.8) and pygame (v. 2.0.0.dev6)  
   
 ## How to play  

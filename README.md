@@ -5,7 +5,17 @@ A simple game made by python (v. 3.8) and pygame (v. 2.0.0.dev6)
 The player's goal is to shoot the Space Spider Balloon down!  
 The player can move the Spaceship up and down using the arrow keys. Fire a bullet using space key.  
 The player can shoot one bullet at a time. Only when the bullet is out of the game then the player can shoot again.  
-![Screenshot of the game](https://github.com/CutieMath/balloonPop/blob/master/image/screenShot.png)
+  
+  
+![Screenshot of the game](https://github.com/CutieMath/balloonPop/blob/master/image/screenShot.png)  
+  
+## Client requirements  
+The game should display the number of missed shots.  
+The bullet speed should be 1.5 times the speed of the balloon.  
+The balloon should change directions (up or down) at any time.  
+  
+  
+![Gif of the game](https://github.com/CutieMath/balloonPop/blob/master/image/demo.gif)
 
 
 

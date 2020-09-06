@@ -18,7 +18,7 @@ The balloon should change directions (up or down) at any time.
 ![Gif of the game](https://github.com/CutieMath/balloonPop/blob/master/image/demo.gif)  
   
 ## Configuration  
-The ideal way to configure the game to your local machine is by getting it from Version Control (Use -> Clone with SSH).  
+The ideal way to configure the game on your local machine is by getting it from Version Control (Use -> Clone with SSH).  
 Alternatively, if configure it by openning the .zip file, delete the vcs.xml file located in the .idea folder if **Invalid VCS root mapping error** occurs.  
   
   

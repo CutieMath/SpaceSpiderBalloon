@@ -23,7 +23,7 @@ window = pygame.display.set_mode((800, 600))
 # Set up Title for the window
 pygame.display.set_caption("Balloon Pop!")
 
-# Set up background
+# Set up background=
 background = pygame.image.load('image/background.png')
 
 # Player image -- a SPACESHIP!
@@ -35,7 +35,7 @@ playerYChange = 0
 # balloon image -- added a spider so it looks scary!
 balloonImg = pygame.image.load('image/spider.png')
 balloonX = 10
-balloonY = random.randint(0, 456)
+balloonY = 6
 balloonYChange = 2
 
 # bullet image -- a fireball
@@ -54,6 +54,10 @@ font = pygame.font.Font('font/Bungee-Regular.ttf', 30)
 textX = 250
 textY = 10
 
+# set triggers for the balloon to change directions
+balloonY_position_list = [24, 228, 328, 72, 110, 134, 150, 434, 124, 86]
+trigger = random.choice(balloonY_position_list)
+
 # end game text
 overText = pygame.font.Font('font/Bungee-Regular.ttf', 50)
 
@@ -68,7 +72,7 @@ def balloon(x, y):
 
 
 # show bullet when spaceBar is pressed
-# use y + 30 to make sure the bullet is shooting from the middle
+# use y + 30 to make sure the bullet is shooting from the middle of the ship
 def fire(x, y):
     global bulletState
     bulletState = "fire"
@@ -86,9 +90,20 @@ def isCollision(balloonX, balloonY, bulletX, bulletY):
 
 
 # display missed shots on the screen
-def show_missed(x, y):
+def showMissed(x, y):
     missed = font.render("Missed Shots: " + str(missed_value), True, (255, 230, 242))
     window.blit(missed, (x, y))
+
+
+# change directions of the balloon
+def changeDirection():
+    y = 0
+    step = random.choice(['U', 'D'])
+    if step == 'U':
+        y = 2
+    elif step == 'D':
+        y = -2
+    return y
 
 
 # function to end the game
@@ -97,17 +112,17 @@ def end():
     window.blit(text, (150, 250))
     while True:
         for event in pygame.event.get():
-            # print(event)
             if event.type == pygame.QUIT:
                 pygame.quit()
+                quit()
 
-        show_missed(textX, textY)
+        showMissed(textX, textY)
         balloon(balloonX, balloonY)
         player(playerX, playerY)
         pygame.display.update()
 
 
-# Set conditions for the game window to close
+# Set loop to run the game
 running = True
 while running:
 
@@ -126,8 +141,7 @@ while running:
             if event.key == pygame.K_DOWN:
                 playerYChange += 10
             if event.key == pygame.K_SPACE:
-                # make sure the bullet is only appearing when it's state is "ready"
-                # witch means when the bullet shoot outside window
+                # make sure the bullet is only appearing when it's state is "ready" (When it shots outside the game)
                 if bulletState == "ready":
                     shootSound = mixer.Sound("sound/shoot.wav")
                     shootSound.play()
@@ -148,12 +162,16 @@ while running:
     elif playerY >= 467:
         playerY = 467
 
-    # Set window boundaries and movements for balloon
-    if balloonY <= 5:
-        balloonY = 5
+    # Set window boundaries for balloon
+    # Set random triggers for the balloon to change directions randomly
+    if balloonY == trigger:
+        balloonYChange = changeDirection()
+        trigger = random.choice(balloonY_position_list)
+    elif balloonY <= 6:
+        balloonY = 6
         balloonYChange = 2
-    elif balloonY >= 467:
-        balloonY = 467
+    elif balloonY >= 466:
+        balloonY = 466
         balloonYChange = -2
 
     # Set window boundaries and movements for bullet
@@ -178,5 +196,5 @@ while running:
     # Draw the player and balloons after the screen background was set up
     balloon(balloonX, balloonY)
     player(playerX, playerY)
-    show_missed(textX, textY)
+    showMissed(textX, textY)
     pygame.display.update()

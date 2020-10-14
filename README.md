@@ -1,4 +1,4 @@
-# The story of Space Spider Balloon
+# The story of Space Spider
 A simple game made by python (v. 3.8) and pygame (v. 2.0.0.dev6)  
   
 ## How to play  
@@ -18,7 +18,7 @@ The balloon should change directions (up or down) at any time.
 ![Gif of the game](https://github.com/CutieMath/balloonPop/blob/master/image/demo.gif)  
   
 ## Configuration  
-The ideal way to configure the game on your local machine is by getting it from Version Control (Code -> Clone with SSH).  
+The ideal way to configure the game on local machine is by getting it from Version Control (Code -> Clone with SSH).  
 Alternatively, if configure it by openning the .zip file, delete the vcs.xml file located in the .idea folder if **Invalid VCS root mapping error** occurs.  
   
   
